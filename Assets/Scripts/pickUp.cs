@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class pickUp : MonoBehaviour
 {
+    public Item Item;
+
+    public GameObject shroom;
 
     public ParticleSystem ParticleSystem;
 
@@ -20,14 +23,14 @@ public class pickUp : MonoBehaviour
     static int inventoryValue;
 
 
-    public Text ValueText;
+    private Text ValueText;
 
-
+    //  ValueText.text = inventoryValue.ToString();
     // Start is called before the first frame update
     void Start()
     {
 
-        ValueText.text = inventoryValue.ToString();
+
     }
 
 
@@ -61,7 +64,8 @@ public class pickUp : MonoBehaviour
 
 
             {
-                Destroy(gameObject);
+               
+                
                 Instantiate(ParticleSystem, transform.position, Quaternion.identity);
                 ParticleSystem.Play();
 
@@ -70,12 +74,13 @@ public class pickUp : MonoBehaviour
 
         }
 
-        void Inventory()
+         void Inventory()
         {
-
-            inventoryValue += 1;
-            ValueText.text = inventoryValue.ToString();
-            Debug.Log(inventoryValue);
+            Destroy(shroom);
+            InventoryManager.Instance.Add(Item);
+            // inventoryValue += 1;
+            //   ValueText.text = inventoryValue.ToString();
+            // Debug.Log(inventoryValue);
         }
     }
 
